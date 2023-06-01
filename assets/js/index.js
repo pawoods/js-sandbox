@@ -47,30 +47,66 @@ function getBeers() {
 }
 
 function showBeers(item) {
-    const div = document.createElement('div');
+    if (item.image_url) {
+        const div = document.createElement('div');
 
-    div.className = "card"
-    div.innerHTML = `<h2>${item.name} - ${item.abv}%</h2>
-                    <h3 class="hidden">${item.tagline}</h3>
-                    <p class="hidden">${item.description}</p>
-                    `;
-    wrapper.appendChild(div);
-    div.onclick = function(){
-        this.children[1].classList.toggle('hidden');
-        this.children[2].classList.toggle('hidden');
-    };
-    div.onmouseenter = function(){
-        this.classList.add('hl');
-        this.classList.add('hl');  
-    };
-    div.onmouseover = function(){
-        this.classList.add('hl');
-        this.classList.add('hl');  
-    };
-    div.onmouseleave = function(){
-        this.classList.remove('hl');
-        this.classList.remove('hl');  
-    };
+        div.className = "card-container"
+        div.innerHTML = `<div class="card">
+                        <img src="${item.image_url}" alt="${item.name} image">
+                        <h2>${item.name} - ${item.abv}%</h2>
+                        <h3 class="hidden">${item.tagline}</h3>
+                        <p class="hidden">${item.description}</p>
+                        <button id="${item.id}">Add to Basket</button>
+                        </div>`;
+        wrapper.appendChild(div);
+        div.onclick = function(e){
+            if (!e.target.matches('button')) {
+                this.children[0].children[2].classList.toggle('hidden');
+                this.children[0].children[3].classList.toggle('hidden');
+                this.classList.toggle('active-card');
+            }
+        };
+        div.onmouseenter = function(){
+            this.children[0].classList.add('hl');
+            this.children[0].classList.add('hl');  
+        };
+        div.onmouseover = function(){
+            this.children[0].classList.add('hl');
+            this.children[0].classList.add('hl');  
+        };
+        div.onmouseleave = function(){
+            this.children[0].classList.remove('hl');
+            this.children[0].classList.remove('hl');  
+        };
+    } else {
+        const div = document.createElement('div');
+
+        div.className = "card-container"
+        div.innerHTML = `<div class="card">
+                        <h2>${item.name} - ${item.abv}%</h2>
+                        <h3 class="hidden">${item.tagline}</h3>
+                        <p class="hidden">${item.description}</p>
+                        <button id="${item.id}">Add to Basket</button>
+                        </div>`;
+        wrapper.appendChild(div);
+        div.onclick = function(){
+            this.children[0].children[1].classList.toggle('hidden');
+            this.children[0].children[2].classList.toggle('hidden');
+            this.classList.toggle('active-card');
+        };
+        div.onmouseenter = function(){
+            this.classList.add('hl');
+            this.classList.add('hl');  
+        };
+        div.onmouseover = function(){
+            this.classList.add('hl');
+            this.classList.add('hl');  
+        };
+        div.onmouseleave = function(){
+            this.classList.remove('hl');
+            this.classList.remove('hl');  
+        };
+    }
 }
 
 function findMatches(wordToMatch, beers) {

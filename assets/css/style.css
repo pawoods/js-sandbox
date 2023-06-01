@@ -9,11 +9,24 @@ body {
     color: lightgray;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card-container {
+    flex: 1 1 50%;
+}
+
 .card {
     background-color: rgba(0, 0, 0, 0.3);
     padding: 10px;
     margin: 5px;
     border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .card h2 {
@@ -25,5 +38,13 @@ body {
 }
 
 .hl {
-    border: 10px solid black; 
+    box-shadow: 5px 5px 20px darkgrey;
+}
+
+img {
+    height: 50px;
+}
+
+.active-card {
+    width: 100%;
 }
