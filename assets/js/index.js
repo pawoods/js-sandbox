@@ -6,11 +6,14 @@ const resetButton = document.querySelector('.reset-button');
 const nameButton = document.querySelector('.name-button');
 const abvButton = document.querySelector('.abv-button');
 const searchInput = document.querySelector('.search-input');
+const basketCount = document.querySelector('.basket-count');
 
 var azSorted = false;
 var abvSorted = false;
 var beers = [];
 var activeBeers = [];
+var basket = [];
+
 
 
 function themeToggle() {
@@ -56,7 +59,7 @@ function showBeers(item) {
                         <h2>${item.name} - ${item.abv}%</h2>
                         <h3 class="hidden">${item.tagline}</h3>
                         <p class="hidden">${item.description}</p>
-                        <button id="${item.id}">Add to Basket</button>
+                        <button id="${item.id}" onclick="addToBasket(event)">Add to Basket</button>
                         </div>`;
         wrapper.appendChild(div);
         div.onclick = function(e){
@@ -86,13 +89,15 @@ function showBeers(item) {
                         <h2>${item.name} - ${item.abv}%</h2>
                         <h3 class="hidden">${item.tagline}</h3>
                         <p class="hidden">${item.description}</p>
-                        <button id="${item.id}">Add to Basket</button>
+                        <button id="${item.id}" onclick="addToBasket(event)">Add to Basket</button>
                         </div>`;
         wrapper.appendChild(div);
-        div.onclick = function(){
-            this.children[0].children[1].classList.toggle('hidden');
-            this.children[0].children[2].classList.toggle('hidden');
-            this.classList.toggle('active-card');
+        div.onclick = function(e){
+            if (!e.target.matches('button')) {
+                this.children[0].children[1].classList.toggle('hidden');
+                this.children[0].children[2].classList.toggle('hidden');
+                this.classList.toggle('active-card');
+            }
         };
         div.onmouseenter = function(){
             this.classList.add('hl');
@@ -173,7 +178,13 @@ function sortAbv() {
     }
 }
 
+function addToBasket(e) {
+    const i = e.target.id;
+    const selected = beers.find(x => x.id == i);
 
+    basket.push(selected);
+    basketCount.innerText = basket.length;
+}
 
 themeButton.addEventListener('click', themeToggle);
 
