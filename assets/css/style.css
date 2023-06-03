@@ -1,6 +1,13 @@
+:root {
+    --background: rgba(0, 0, 0, 0.1);
+    --main: rgba(0, 0, 0, 1);
+    --card: rgba(0, 0, 0, 0.2);
+    --highlight: rgba(0, 0, 0, 0.3);
+}
+
 body {
-    background-color: lightgray;
-    color: black;
+    background-color: var(--background);
+    color: var(--main);
     padding: 10px;
 }
 
@@ -20,7 +27,7 @@ body {
 }
 
 .card {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--card);
     padding: 10px;
     margin: 5px;
     border-radius: 10px;
@@ -38,7 +45,7 @@ body {
 }
 
 .hl {
-    box-shadow: 0px 0px 30px darkgrey;
+    background-color: var(--highlight);
 }
 
 img {
@@ -47,4 +54,11 @@ img {
 
 .active-card {
     width: 100%;
+}
+
+button {
+    background-color: var(--background);
+    color: var(--main);
+    border: 1px solid var(--main);
+    border-radius: 5px;
 }

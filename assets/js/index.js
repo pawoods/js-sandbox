@@ -1,27 +1,38 @@
 const wrapper = document.getElementsByClassName('wrapper')[0];
 const body = document.querySelector('body');
+const r = document.querySelector(':root');
 
 const themeButton = document.querySelector('.theme');
 const resetButton = document.querySelector('.reset-button');
 const nameButton = document.querySelector('.name-button');
 const abvButton = document.querySelector('.abv-button');
 const searchInput = document.querySelector('.search-input');
+const basket = document.querySelector('.basket');
+const basketIcon = document.querySelector('.basket-icon');
 const basketCount = document.querySelector('.basket-count');
 
 var azSorted = false;
 var abvSorted = false;
 var beers = [];
 var activeBeers = [];
-var basket = [];
+var inBasket = [];
 
 
 
 function themeToggle() {
-    body.classList.toggle('dark-mode');
+    // body.classList.toggle('dark-mode');
     if(themeButton.innerHTML === `<i class="fa-regular fa-moon"></i>`) {
         themeButton.innerHTML = `<i class="fa-regular fa-sun"></i>`;
+        r.style.setProperty('--background', 'rgba(0, 0, 0, 0.8)');
+        r.style.setProperty('--main', 'rgba(255, 255, 255, 1)');
+        r.style.setProperty('--card', 'rgba(0, 0, 0, 0.3)');
+        r.style.setProperty('--highlight', 'rgba(0 , 0, 0, 0.8)');
     } else {
         themeButton.innerHTML = `<i class="fa-regular fa-moon"></i>`;
+        r.style.setProperty('--background', 'rgba(0, 0, 0, 0.1)');
+        r.style.setProperty('--main', 'rgba(0, 0, 0, 1)');
+        r.style.setProperty('--card', 'rgba(0, 0, 0, 0.2)');
+        r.style.setProperty('--highlight', 'rgba(0, 0, 0, 0.3)');
     }
 }
 
@@ -100,18 +111,27 @@ function showBeers(item) {
             }
         };
         div.onmouseenter = function(){
-            this.classList.add('hl');
-            this.classList.add('hl');  
+            this.children[0].classList.add('hl');
+            this.children[0].classList.add('hl');  
         };
         div.onmouseover = function(){
-            this.classList.add('hl');
-            this.classList.add('hl');  
+            this.children[0].classList.add('hl');
+            this.children[0].classList.add('hl');  
         };
         div.onmouseleave = function(){
-            this.classList.remove('hl');
-            this.classList.remove('hl');  
+            this.children[0].classList.remove('hl');
+            this.children[0].classList.remove('hl');  
         };
     }
+}
+
+function reset() {
+    wrapper.innerHTML = '';
+    activeBeers = [];
+    beers.forEach((beer) => {
+        showBeers(beer);
+        activeBeers.push(beer);
+    });
 }
 
 function findMatches(wordToMatch, beers) {
@@ -127,7 +147,6 @@ function displayMatches() {
     activeBeers.forEach((beer) => {
         showBeers(beer);
     });
-    // console.log(searchBeers);
 }
 
 function sortAZ() {
@@ -182,15 +201,25 @@ function addToBasket(e) {
     const i = e.target.id;
     const selected = beers.find(x => x.id == i);
 
-    basket.push(selected);
-    basketCount.innerText = basket.length;
+    inBasket.push(selected);
+    basketCount.innerText = inBasket.length;
+
+    const li = document.createElement('li');
+    li.innerHTML = `<p>${selected.name}</p>
+                    <button>Remove</button>`;
+    basket.appendChild(li);
+}
+
+function showBasket() {
+    basket.classList.toggle('hidden');
 }
 
 themeButton.addEventListener('click', themeToggle);
 
+basketIcon.addEventListener('click', showBasket);
 searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
-resetButton.addEventListener('click', getBeers);
+resetButton.addEventListener('click', reset);
 nameButton.addEventListener('click', sortAZ);
 abvButton.addEventListener('click', sortAbv);
 
