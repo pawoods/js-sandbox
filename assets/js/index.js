@@ -221,7 +221,11 @@ function addToBasket(e) {
 }
 
 function showBasket() {
-    basket.classList.toggle('hidden');
+    if(document.querySelectorAll('ul.basket li').length == 0) {
+        basket.classList.add('hidden');
+    } else {
+        basket.classList.toggle('hidden');
+    }
 }
 
 function removeItem(e) {
