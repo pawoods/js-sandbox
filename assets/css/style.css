@@ -11,6 +11,13 @@ body {
     padding: 10px;
 }
 
+header {
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .dark-mode {
     background-color: black;
     color: lightgray;
@@ -23,17 +30,20 @@ body {
 }
 
 .card-container {
-    flex: 1 1 50%;
+    flex: auto;
+    box-sizing: border-box;
+    padding: 5px;
 }
 
 .card {
     background-color: var(--card);
     padding: 10px;
-    margin: 5px;
+    height: 100%;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .card h2 {
@@ -52,13 +62,15 @@ img {
     height: 50px;
 }
 
-.active-card {
-    width: 100%;
-}
-
 button {
     background-color: var(--background);
     color: var(--main);
     border: 1px solid var(--main);
     border-radius: 5px;
+}
+
+.basket-count {
+    background-color: red;
+    border-radius: 50%;
+    padding: 0 2px;
 }

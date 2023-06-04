@@ -7,6 +7,7 @@ const resetButton = document.querySelector('.reset-button');
 const nameButton = document.querySelector('.name-button');
 const abvButton = document.querySelector('.abv-button');
 const searchInput = document.querySelector('.search-input');
+const basketContainer = document.querySelector('.basket-container');
 const basket = document.querySelector('.basket');
 const basketIcon = document.querySelector('.basket-icon');
 const basketCount = document.querySelector('.basket-count');
@@ -15,7 +16,7 @@ var azSorted = false;
 var abvSorted = false;
 var beers = [];
 var activeBeers = [];
-var inBasket = [];
+// var inBasket = []; not currently using array of objects for basket
 
 
 
@@ -201,22 +202,60 @@ function addToBasket(e) {
     const i = e.target.id;
     const selected = beers.find(x => x.id == i);
 
-    inBasket.push(selected);
-    basketCount.innerText = inBasket.length;
+    // inBasket.push(selected);
+    // basketCount.innerText = inBasket.length;
 
     const li = document.createElement('li');
     li.innerHTML = `<p>${selected.name}</p>
-                    <button>Remove</button>`;
+                    <button onclick="removeItem(event)">Remove</button>`;
     basket.appendChild(li);
+
+    if (document.querySelectorAll('ul.basket li').length == 0) {
+        basketCount.innerText = '';
+        basketCount.classList.add('hidden');
+        basket.classList.add('hidden');
+    } else {
+        basketCount.innerText = document.querySelectorAll('ul.basket li').length;
+        basketCount.classList.remove('hidden');
+    }
 }
 
 function showBasket() {
     basket.classList.toggle('hidden');
 }
 
+function removeItem(e) {
+    const toRemove = e.target.closest('li');
+    toRemove.remove();
+
+    if (document.querySelectorAll('ul.basket li').length == 0) {
+        basketCount.innerText = '';
+        basketCount.classList.add('hidden');
+        basket.classList.add('hidden');
+    } else {
+        basketCount.innerText = document.querySelectorAll('ul.basket li').length;
+        basketCount.classList.remove('hidden');
+    }
+    e.stopPropagation();
+}
+
+// function hideBasket(e) {
+//     if(!e.target.matches('#basket') && !basket.classList.contains('hidden')) {
+//         basket.classList.add('hidden');
+//         console.log(e.target);
+//     }
+// }
+
+document.addEventListener('click', function(e) {
+    if(!basketContainer.contains(e.target)){
+        basket.classList.add('hidden');
+    }
+});
+
 themeButton.addEventListener('click', themeToggle);
 
 basketIcon.addEventListener('click', showBasket);
+
 searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
 resetButton.addEventListener('click', reset);
