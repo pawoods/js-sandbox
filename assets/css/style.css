@@ -82,7 +82,7 @@ img {
     height: 50px;
 }
 
-button {
+button, input {
     background-color: var(--background);
     color: var(--main);
     border: 1px solid var(--main);
@@ -128,4 +128,8 @@ button {
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 5px;
+}
+
+.buttons button, .buttons input {
+    margin: 5px;
 }

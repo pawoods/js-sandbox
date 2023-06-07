@@ -133,6 +133,10 @@ function reset() {
         showBeers(beer);
         activeBeers.push(beer);
     });
+    abvSorted = false;
+    azSorted = false;
+    abvButton.innerHTML = `Sort by Abv: <i class="fa-solid fa-arrow-up"></i>`;
+    nameButton.innerText = `Sort by name: A-Z`;
 }
 
 function findMatches(wordToMatch, beers) {
