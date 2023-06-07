@@ -128,6 +128,7 @@ function showBeers(item) {
 
 function reset() {
     wrapper.innerHTML = '';
+    searchInput.value = '';
     activeBeers = [];
     beers.forEach((beer) => {
         showBeers(beer);
