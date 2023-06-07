@@ -15,18 +15,23 @@
 
 <body>
     <!-- Page Header -->
-    <header class="pageHeader">
-        <h1 class="title">
-            Brewdog <span class="subTitle">Beers</span>
-        </h1>
-        <button class="theme"><i class="fa-regular fa-moon"></i></button>
+    <header>
+        <div class="page-header">
+            <h1 class="title">
+                Brewdog <span class="subTitle">Beers</span>
+            </h1>
+            <div class="options">
+                <button class="theme"><i class="fa-regular fa-moon"></i></button>
+                <div class="basket-icon"><span class="basket-count hidden"></span><i id="basket"
+                        class="fa-solid fa-basket-shopping"></i>
+                </div>
+            </div>
+        </div>
         <div class="basket-container">
-            <div class="basket-icon"><span class="basket-count hidden"></span><i id="basket" class="fa-solid fa-basket-shopping"></i>
-            </div>    
             <ul class="basket hidden"></ul>
         </div>
-
     </header>
+    <div class="spacer"></div>
 
     <div class="buttons">
         <input class="search-input" class="search" type="text" placeholder="Search...">

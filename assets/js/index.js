@@ -1,6 +1,6 @@
+const r = document.querySelector(':root');
 const wrapper = document.getElementsByClassName('wrapper')[0];
 const body = document.querySelector('body');
-const r = document.querySelector(':root');
 
 const themeButton = document.querySelector('.theme');
 const resetButton = document.querySelector('.reset-button');
@@ -71,7 +71,7 @@ function showBeers(item) {
                         <h2>${item.name} - ${item.abv}%</h2>
                         <h3 class="hidden">${item.tagline}</h3>
                         <p class="hidden">${item.description}</p>
-                        <button id="${item.id}" onclick="addToBasket(event)">Add to Basket</button>
+                        <button id="${item.id}" onclick="addToBasket(event)">+</button>
                         </div>`;
         wrapper.appendChild(div);
         div.onclick = function(e){
@@ -101,7 +101,7 @@ function showBeers(item) {
                         <h2>${item.name} - ${item.abv}%</h2>
                         <h3 class="hidden">${item.tagline}</h3>
                         <p class="hidden">${item.description}</p>
-                        <button id="${item.id}" onclick="addToBasket(event)">Add to Basket</button>
+                        <button id="${item.id}" onclick="addToBasket(event)">+</button>
                         </div>`;
         wrapper.appendChild(div);
         div.onclick = function(e){
@@ -206,8 +206,10 @@ function addToBasket(e) {
     // basketCount.innerText = inBasket.length;
 
     const li = document.createElement('li');
-    li.innerHTML = `<p>${selected.name}</p>
-                    <button onclick="removeItem(event)">Remove</button>`;
+    li.innerHTML = `<div class="basket-item">
+                        <p>${selected.name}</p>
+                        <button onclick="removeItem(event)">-</button>
+                    </div>`;
     basket.appendChild(li);
 
     if (document.querySelectorAll('ul.basket li').length == 0) {
@@ -221,7 +223,7 @@ function addToBasket(e) {
 }
 
 function showBasket() {
-    if(document.querySelectorAll('ul.basket li').length == 0) {
+    if(document.querySelectorAll('.basket li').length == 0) {
         basket.classList.add('hidden');
     } else {
         basket.classList.toggle('hidden');
@@ -251,7 +253,7 @@ function removeItem(e) {
 // }
 
 document.addEventListener('click', function(e) {
-    if(!basketContainer.contains(e.target)){
+    if(!basketContainer.contains(e.target) && !basketIcon.contains(e.target)){
         basket.classList.add('hidden');
     }
 });

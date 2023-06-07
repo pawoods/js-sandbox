@@ -8,14 +8,33 @@
 body {
     background-color: var(--background);
     color: var(--main);
-    padding: 10px;
+    padding: 0;
+    margin: 0;
 }
 
-header {
+.page-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
     display: flex;
     justify-items: center;
     justify-content: space-between;
     align-items: center;
+    background-color: gray;
+}
+.options {
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
+}
+
+.spacer {
+    height: 80px;
+    width: 100%;
 }
 
 .dark-mode {
@@ -27,6 +46,7 @@ header {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 0 5px;
 }
 
 .card-container {
@@ -73,4 +93,39 @@ button {
     background-color: red;
     border-radius: 50%;
     padding: 0 2px;
+}
+
+.basket {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    list-style: none;
+    background-color: gray;
+    margin: 0;
+    padding: 0 20px;
+    max-height: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.basket::-webkit-scrollbar {
+    display: none;
+}
+
+.basket-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.basket-item button {
+    margin-left: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 5px;
 }
